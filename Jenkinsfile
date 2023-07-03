@@ -31,7 +31,7 @@ pipeline {
           }
     stage('Quality Gate') {
         steps {
-        withSonarQubeEnv('sonarqube-10.0') {
+        withSonarQubeEnv('sonarqube-10.1') {
           sh 'mvn sonar:sonar'
          }
        } 
