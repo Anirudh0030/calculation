@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculation-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: calculation-deployment
+  template:
+    metadata:
+      labels:
+        app: calculation-deployment
+    spec:
+      containers:
+        - name: calculation
+          image: anirudh03/cloud_pipeline_project_new_1
+          ports:
+            - containerPort: 9090
+            
