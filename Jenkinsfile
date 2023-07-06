@@ -31,30 +31,11 @@ pipeline {
           }
     stage('Quality Gate') {
         steps {
-        withSonarQubeEnv('sonarqube-10.0') {
+        withSonarQubeEnv('sonarqube-10.1') {
           sh 'mvn sonar:sonar'
          }
        } 
     }   
-      stage ('Nexus uploader') {
-          steps{
-           nexusArtifactUploader artifacts: 
-[ 
-    [
-        artifactId: 'calculation',
-        classifier: '', file: 'target/calculation.war',
-        type: 'war'
-    ]
-],      
-        credentialsId: 'Nexus-auth',
-        groupId: 'com.apple', 
-        nexusUrl: '192.168.29.203:8081', 
-        nexusVersion: 'nexus3', 
-        protocol: 'http', 
-        repository: 'calculation', 
-        version: '1.0'
-      }
-  }
   stage ('Docker image build'){
         steps{
              script{
