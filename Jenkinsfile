@@ -55,5 +55,12 @@ pipeline {
                 
             }
         }
+  stage ('Kubernetes Deployment'){
+         steps{
+              script{
+                  sh 'kubectl apply -f Calculation.yaml'
+                }
+            }  
+        }
     }
 }    
