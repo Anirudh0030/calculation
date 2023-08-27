@@ -62,5 +62,21 @@ pipeline {
                 }
             }  
         }
+   stage ('Deploy on K8s'){
+         steps{
+             sshagent(['K8s']) {
+             sh "scp -o StrictHostKeyChecking=no Calculation.yaml ubuntu@3.135.1.80:/home/ubuntu" 
+             script{
+                 try{
+                     sh "ubuntu@3.135.1.80 kubectl apply -f ."
+                 }  catch(error){
+                     sh "ubuntu@3.135.1.80 kubectl create -f ."
+                    }
+                  }
+                }
+            }
+         }
+        }
+    }     
     }
 }    
